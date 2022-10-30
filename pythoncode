@@ -1,0 +1,76 @@
+#Cell 1
+import pandas as pd
+
+df_network = pd.read_csv('../data/prep_NF-UNSW-NB15.csv')
+df_network
+
+
+
+#Cell 2
+df_network = df_network[(df_network.IPV4_SRC_ADDR != '192.168.241.243') & (df_network.IPV4_SRC_ADDR != '127.0.0.1') & (df_network.IPV4_SRC_ADDR != '224.0.0.5')]
+df_network
+df_network = df_network[(df_network.IPV4_DST_ADDR != '192.168.241.243') & (df_network.IPV4_DST_ADDR != '127.0.0.1') & (df_network.IPV4_DST_ADDR != '224.0.0.5')]
+df_network
+
+
+
+#Cell 3
+    SourceCategory = []
+    for row in df_network['IPV4_SRC_ADDR']:
+        if row == '10.40.85.10' :    SourceCategory.append('Client')
+        elif row == '10.40.85.1' :   SourceCategory.append('Router')
+        elif row == '10.40.182.1' :  SourceCategory.append('Router')
+        elif row == '10.40.182.6' :  SourceCategory.append('Intranet')
+        elif row == '10.40.198.10' :  SourceCategory.append('Intranet')
+        elif row == '192.168.241.50' :  SourceCategory.append('Intranet')
+        elif row == '10.40.182.255' :  SourceCategory.append('Intranet')
+        elif '59.166.0.' in row :  SourceCategory.append('Server')
+        elif '175.45.176.' in row :  SourceCategory.append('Server')
+        elif '149.171.126.' in row :  SourceCategory.append('Server')
+      
+        else:           SourceCategory.append('No_Category')
+            
+df_network['SourceCategory'] = SourceCategory
+display(df_network[df_network.SourceCategory == 'Client'])
+display(df_network[df_network.SourceCategory == 'Router'])
+display(df_network[df_network.SourceCategory == 'Intranet'])
+display(df_network[df_network.SourceCategory == 'Server'])
+
+    DestinationCategory = []
+    for row in df_network['IPV4_DST_ADDR']:
+        if row == '10.40.85.10' :    DestinationCategory.append('Client')
+        elif row == '10.40.85.1' :   DestinationCategory.append('Router')
+        elif row == '10.40.182.1' :  DestinationCategory.append('Router')
+        elif row == '10.40.182.6' :  DestinationCategory.append('Intranet')
+        elif row == '10.40.198.10' :  DestinationCategory.append('Intranet')
+        elif row == '192.168.241.50' :  DestinationCategory.append('Intranet')
+        elif row == '10.40.182.255' :  DestinationCategory.append('Intranet')
+        elif '59.166.0.' in row :  DestinationCategory.append('Server')
+        elif '175.45.176.' in row :  DestinationCategory.append('Server')
+        elif '149.171.126.' in row :  DestinationCategory.append('Server')
+      
+        else:           DestinationCategory.append('No_Category')
+            
+df_network['DestinationCategory'] = DestinationCategory
+display(df_network[df_network.DestinationCategory == 'Client'])
+display(df_network[df_network.DestinationCategory == 'Router'])
+display(df_network[df_network.DestinationCategory == 'Intranet'])
+display(df_network[df_network.DestinationCategory == 'Server'])
+
+
+#Cell 4
+#fill here
+for row in df_network['L4_SRC_PORT']:
+        if row == 20 :    df_network['L4_SRC_PORT'] = 'FTP'
+        elif row == 21 :   df_network['L4_SRC_PORT'] = 'FTP'
+#        elif row == '10.40.182.1' :  SourceCategory.append('Router')
+#        elif row == '10.40.182.6' :  SourceCategory.append('Intranet')
+#        elif row == '10.40.198.10' :  SourceCategory.append('Intranet')
+#        elif row == '192.168.241.50' :  SourceCategory.append('Intranet')
+#        elif row == '10.40.182.255' :  SourceCategory.append('Intranet')
+#        elif '59.166.0.' in row :  SourceCategory.append('Server')
+#        elif '175.45.176.' in row :  SourceCategory.append('Server')
+#        elif '149.171.126.' in row :  SourceCategory.append('Server')
+      
+        else:           df_network['L4_SRC_PORT'] = 'uncommon'
+display(df_network[df_network.L4_SRC_PORT == 'FTP'])
