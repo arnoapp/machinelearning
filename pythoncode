@@ -60,17 +60,18 @@ display(df_network[df_network.DestinationCategory == 'Server'])
 
 #Cell 4
 #fill here
-for row in df_network['L4_SRC_PORT']:
+    for row in df_network['L4_SRC_PORT']:
         if row == 20 :    df_network['L4_SRC_PORT'] = 'FTP'
         elif row == 21 :   df_network['L4_SRC_PORT'] = 'FTP'
-#        elif row == '10.40.182.1' :  SourceCategory.append('Router')
-#        elif row == '10.40.182.6' :  SourceCategory.append('Intranet')
-#        elif row == '10.40.198.10' :  SourceCategory.append('Intranet')
-#        elif row == '192.168.241.50' :  SourceCategory.append('Intranet')
-#        elif row == '10.40.182.255' :  SourceCategory.append('Intranet')
-#        elif '59.166.0.' in row :  SourceCategory.append('Server')
-#        elif '175.45.176.' in row :  SourceCategory.append('Server')
-#        elif '149.171.126.' in row :  SourceCategory.append('Server')
+        elif row == 25 :  df_network['L4_SRC_PORT'] = 'SMTP'
+        elif row == 53 :  df_network['L4_SRC_PORT'] = 'DNS'
+        elif row == 80 :  df_network['L4_SRC_PORT'] = 'HTTP'
+        elif row == 123 :  df_network['L4_SRC_PORT'] = 'NTP'
+        elif row == 179 :  df_network['L4_SRC_PORT'] = 'BGP'
+        elif row == 443 :  df_network['L4_SRC_PORT'] = 'HTTPS'
+        elif row == 500 :  df_network['L4_SRC_PORT'] = 'ISAKMP'
+        elif row == 3389 :  df_network['L4_SRC_PORT'] = 'RDP'
+
       
         else:           df_network['L4_SRC_PORT'] = 'uncommon'
-display(df_network[df_network.L4_SRC_PORT == 'FTP'])
+display(df_network[df_network.DestinationCategory == 'Server'])
